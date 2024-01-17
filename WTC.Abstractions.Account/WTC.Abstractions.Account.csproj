@@ -5,7 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <Authors>Qwxp</Authors>
-        <Description>Handling *Multiple Accounts easier</Description>
+        <Description>WTelegramClient Abstractions for easier (Multiple) Account handling.</Description>
         <Copyright>Apache-2.0</Copyright>
         <PackageProjectUrl>https://github.com/MrAliSalehi/WTelegramClient.Abstractions.Account</PackageProjectUrl>
         <PackageIcon>logo.png</PackageIcon>
