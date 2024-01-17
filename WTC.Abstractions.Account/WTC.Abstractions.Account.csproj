@@ -10,7 +10,7 @@
         <PackageProjectUrl>https://github.com/MrAliSalehi/WTelegramClient.Abstractions.Account</PackageProjectUrl>
         <PackageIcon>logo.png</PackageIcon>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-        <Version>1.0.0</Version>
+        <Version>1.0.1</Version>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
     </PropertyGroup>

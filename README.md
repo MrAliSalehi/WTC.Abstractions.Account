@@ -104,7 +104,7 @@ now that you got your clients, you can access them:
 var wClient = accountHandler.ByName("acc1");
 ```
 
--get all of them
+- get all of them
 
 ```csharp
 var allClients = accountHandler.GetClients();
