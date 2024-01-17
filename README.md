@@ -5,6 +5,8 @@ this small project intents to make it easier to work with multiple telegram acco
 
 it also offers a `AccountHandler` which can handle all your accounts and have some extra functionality.
 
+⚠️this project is on development and every API inside of it is subject to change.⚠️
+
 ## use
 
 simply install the library: `dotnet add package WTC.Abstractions.Account`
