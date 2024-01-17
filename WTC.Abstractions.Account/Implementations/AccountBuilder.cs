@@ -18,7 +18,6 @@ public class AccountBuilder : IAccountCreator
         return new();
     }
 
-
     public IAccountCreator FromPath(string path)
     {
         var client = new Client(null, new FileStream(path, FileMode.Open));
@@ -52,12 +51,13 @@ public class AccountBuilder : IAccountCreator
 
         return new AccountHandler(_clients);
     }
-    public async ValueTask<IAccountHandler> BuildAsync(Func<Client, bool> disposeWhen)
+
+    public async ValueTask<IAccountHandler> BuildAsync(Func<string, Client, bool> disposeWhen)
     {
-        await _clients.Values.Iter(async client =>
+        await _clients.Iter(async (name, client) =>
         {
             await client.LoginBotIfNeeded();
-            if (disposeWhen(client))
+            if (disposeWhen(name, client))
                 client.Dispose();
         });
         return new AccountHandler(_clients);
