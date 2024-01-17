@@ -34,7 +34,7 @@ var accountHandler = await AccountBuilder
                      .WithApiId("")
                      .WithPhone("")
                  , () => "", "acc3")
-    .BuildAsync();
+    .BuildAsync((name, client) => name is "acc2");
 
 
 var wClient = accountHandler.ByName("acc1");

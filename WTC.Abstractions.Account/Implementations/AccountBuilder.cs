@@ -27,16 +27,16 @@ public class AccountBuilder : IAccountCreator
         return this;
     }
 
-    public IAccountCreator FromAccount(TelAccount account, Func<string> verifyCode, string sessionName = "WTC.session")
+    public IAccountCreator FromAccount(TelAccount account, Func<string> verifyCode, string sessionPath = "WTC.session")
     {
-        CreateAccount(account, verifyCode, sessionName);
+        CreateAccount(account, verifyCode, sessionPath);
         return this;
     }
 
-    public IAccountCreator FromAccount(Func<IApiHash, ITelAccountBuilder> builder, Func<string> verifyCode, string sessionName = "WTC.session")
+    public IAccountCreator FromAccount(Func<IApiHash, ITelAccountBuilder> builder, Func<string> verifyCode, string sessionPath = "WTC.session")
     {
         var account = builder(TelAccountBuilder.New()).Build();
-        CreateAccount(account, verifyCode, sessionName);
+        CreateAccount(account, verifyCode, sessionPath);
         return this;
     }
 
@@ -63,8 +63,12 @@ public class AccountBuilder : IAccountCreator
         return new AccountHandler(_clients);
     }
 
-    private void CreateAccount(TelAccount account, Func<string> verifyCode, string sessionName)
+    private void CreateAccount(TelAccount account, Func<string> verifyCode, string sessionPath)
     {
+        //this is not the best idea, but for now it will avoid duplications
+        if (File.Exists(sessionPath))
+            sessionPath = sessionPath.Replace(".session", $"_{Guid.NewGuid()}.session");
+
         var client = new Client(str =>
         {
             return str switch
@@ -79,10 +83,11 @@ public class AccountBuilder : IAccountCreator
                 "server_address"    => account.UseTestServer ? TelAccount.TestServerAddr : null,
                 _                   => null
             };
-        }, new FileStream(sessionName, FileMode.OpenOrCreate));
+        }, new FileStream(sessionPath, FileMode.OpenOrCreate));
 
         ArgumentNullException.ThrowIfNull(client);
 
-        _clients.Add(sessionName.Replace(".session", ""), client);
+        var info = new FileInfo(sessionPath);
+        _clients.Add(info.Name.Replace(".session", ""), client);
     }
 }
