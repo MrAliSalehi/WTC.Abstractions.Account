@@ -44,7 +44,7 @@ public class AccountBuilder : IAccountCreator
     {
         await _clients.Values.Iter(async client =>
         {
-            await client.LoginBotIfNeeded();
+            await client.LoginUserIfNeeded();
             if (disposeAfter)
                 client.Dispose();
         });
@@ -56,7 +56,7 @@ public class AccountBuilder : IAccountCreator
     {
         await _clients.Iter(async (name, client) =>
         {
-            await client.LoginBotIfNeeded();
+            await client.LoginUserIfNeeded();
             if (disposeWhen(name, client))
                 client.Dispose();
         });
