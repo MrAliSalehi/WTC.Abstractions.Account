@@ -12,7 +12,7 @@ public sealed class AccountHandler : IAccountHandler
     private readonly ImmutableDictionary<string, Client> _clients;
     private readonly Client[] _clientsArray;
     private bool _withParallel;
-    private TimeSpan _delay = TimeSpan.MinValue;
+    private TimeSpan _delay = TimeSpan.Zero;
     ImmutableDictionary<string, Client> IAccountHandler.Clients
     {
         get => _clients;
